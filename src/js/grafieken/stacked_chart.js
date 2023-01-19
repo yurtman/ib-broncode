@@ -207,7 +207,6 @@ function StackedAreaChart(
 }
 
 function makeChart(id, data, width, legenda) {
-  console.log("legenda:" + data[0].getal);
   return StackedAreaChart(id, data, legenda, {
     x: (d) => d.id,
     y: (d) => d.getal * legenda.getFactorYas(),

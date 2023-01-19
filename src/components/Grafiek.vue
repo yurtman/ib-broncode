@@ -364,15 +364,6 @@ export default {
       if (index == 0) {
         return [{ value: "V", label: belasting_data.LEEFTIJDEN.V }];
       } else {
-        console.log(
-          "ARR:" +
-            leeftijdenData[0].value +
-            "-" +
-            leeftijdenData[0].label +
-            ":" +
-            leeftijdenData.length
-        );
-
         return leeftijdenData;
       }
     },

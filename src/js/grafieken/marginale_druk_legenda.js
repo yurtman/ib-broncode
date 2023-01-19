@@ -105,7 +105,6 @@ export class MarginaleDrukLegenda extends Legenda {
   }
 
   getFactorYas() {
-    console.log("NONDS");
     return 1;
   }
 }

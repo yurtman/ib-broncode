@@ -78,7 +78,7 @@ test('Netto 10.000', () => {
 
 
 test('',() => {
-  expect(inkomen.toeslagenToetsInkomen(100, [{inkomen: 200}, {}])).toEqual(300);
+  expect(inkomen.toeslagenToetsInkomen(100, [{bruto_inkomen: 200}, {}])).toEqual(300);
 })
 
 // test('Netto 25.000', () => {
