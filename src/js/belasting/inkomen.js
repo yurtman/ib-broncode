@@ -65,6 +65,10 @@ function toetsingsinkomen(arbeidsinkomen, hypotheekRenteAftrek) {
   return Math.max(0, arbeidsinkomen + (hypotheekRenteAftrek || 0));
 }
 
+function toeslagenToetsInkomen(arbeidsinkomen, personen) {
+  return arbeidsinkomen + personen.reduce((subtotaal, a) => subtotaal + (isNaN(a.inkomen) ? 0 : a.inkomen), 0);
+}
+
 function inkomstenBelasting(toetsingsInkomen) {
   return Math.round(
     Math.min(data.IBGRENS_2023, toetsingsInkomen) * 0.3693 +
@@ -107,6 +111,7 @@ function nettoKortingenInkomens(personen) {
 
 export default {
   toetsingsinkomen,
+  toeslagenToetsInkomen,
   inkomstenBelasting,
   maxArbeidsKorting,
   arbeidskorting,

@@ -34,6 +34,7 @@ function berekenBeschikbaarInkomen(
   );
   let toetsingsInkomenBelasting = inkomen.inkomstenBelasting(toetsingsInkomen);
   let arbeidsinkomenBelasting = inkomen.inkomstenBelasting(arbeidsinkomen);
+  let toeslagenToetsInkomen = inkomen.toeslagenToetsInkomen(arbeidsinkomen, personen);
   let nettoArbeidsinkomen = arbeidsinkomen - toetsingsInkomenBelasting;
   let algemeneHeffingsKorting = inkomen.algemeneHeffingsKorting(
     toetsingsInkomen,
@@ -55,7 +56,7 @@ function berekenBeschikbaarInkomen(
     toetsingsInkomenBelasting
   );
   let kindgebondenBudget = kgb.kindgebondenBudget(
-    arbeidsinkomen,
+    toeslagenToetsInkomen,
     algemeneGegevens.maxKindgebondenBudget,
     algemeneGegevens.toeslagenpartner
   );
@@ -69,11 +70,11 @@ function berekenBeschikbaarInkomen(
     algemeneHeffingsKorting: algemeneHeffingsKorting,
     arbeidskorting: arbeidskorting,
     zorgtoeslag: zt.zorgtoeslag(
-      arbeidsinkomen,
+      toeslagenToetsInkomen,
       algemeneGegevens.toeslagenpartner
     ),
     wonen: algemeneGegevens.huren
-      ? ht.huurtoeslag(arbeidsinkomen, wonen.huur, personen.length)
+      ? ht.huurtoeslag(toeslagenToetsInkomen, wonen.huur, personen.length)
       : effectieveHypotheekRenteAftrek,
     kinderbijslag: algemeneGegevens.kinderbijslag,
     kindgebondenBudget: kindgebondenBudget,
