@@ -22,7 +22,6 @@ import { BeschikbaarInkomen } from '../../../src/js/berekeningen/BeschikbaarInko
 const vis = {periode:'jaar'};
 const personen = [{leeftijd:'V'}, {leeftijd:'V', inkomen:0}, {leeftijd:'K611'}, {leeftijd:'K611'}];
 const wonen = {woning_type:'huur', huur:1100};
-const algemeneGegevens = algemeen.berekenAlgemeneGegevens(vis, personen, wonen);
 const arbeidsinkomen = 46377;
 const bekenen = new BeschikbaarInkomen(vis, personen, wonen);
 const berekening = bekenen.bereken(arbeidsinkomen);

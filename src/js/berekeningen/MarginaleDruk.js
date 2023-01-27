@@ -44,9 +44,9 @@ export class MarginaleDruk extends BeschikbaarInkomen {
     return 1;
   }
 
-  mdPercentage(netto1, netto2, ΔBudget, inverse) {
+  mdPercentage(netto1, netto2, Δbudget, inverse) {
     const ΔNetto = netto2 - netto1;
-    const percentage = ΔBudget == 0 ? 0 : ΔNetto / ΔBudget;
+    const percentage = Δbudget == 0 ? 0 : ΔNetto / Δbudget;
     const result = (percentage * 100).toFixed(2);
     const relevantResult =
       isNaN(result) || result == 0 ? 0 : inverse ? -result : 1 * result;
