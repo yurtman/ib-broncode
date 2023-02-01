@@ -29,8 +29,12 @@ export class MarginaleDrukLegenda extends Legenda {
     berekening
   ) {
     let totaal = 0;
-    let ld = { grafiek: [], titel: "Salarisverhoging" };
     let b = berekening.bereken(data[offset].id);
+    let ld = {
+      grafiek: [],
+      titel: "Salarisverhoging",
+      arbeidsInkomen: data[offset].id,
+    };
 
     for (let j = 0; j < length; j++) {
       let entry = data[offset + j];

@@ -30,8 +30,12 @@ export class BeschikbaarInkomenLegenda extends Legenda {
     berekening
   ) {
     let totaal = 0;
-    let ld = { grafiek: [], titel: "Beschikbaar inkomen" };
     let b = berekening.bereken(data[offset].id);
+    let ld = {
+      grafiek: [],
+      titel: "Beschikbaar inkomen" + b.id,
+      arbeidsInkomen: data[offset].id,
+    };
 
     for (let j = 0; j < length; j++) {
       let entry = data[offset + j];

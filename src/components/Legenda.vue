@@ -1,7 +1,18 @@
 <template>
   <n-card title="Legenda" size="small">
-    <n-space vertical>
-      <p>{{ data.titel }}</p>
+    <n-space
+      vertical
+      v-if="!data.grafiek || Object.keys(data.grafiek).length == 0"
+    >
+      Beweeg de muis over de grafiek om de legenda te tonen.
+    </n-space>
+    <n-space vertical v-else>
+      <p>
+        <!-- <n-input-number :value="data.arbeidsInkomen" /> -->
+        Arbeidsinkomen (Salaris): &euro; {{ data.arbeidsInkomen }} <br />{{
+          data.titel
+        }}
+      </p>
       <n-table :single-line="false" size="tiny" class="table">
         <tbody>
           <tr v-for="gd in data.grafiek">
@@ -45,13 +56,5 @@
 <script>
 export default {
   props: ["data"],
-  data() {
-    return {
-      columns: this.data.columns,
-    };
-  },
-  mounted() {
-    console.log(this.data.grafiek);
-  },
 };
 </script>
