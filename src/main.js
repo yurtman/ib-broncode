@@ -22,7 +22,7 @@ import App from "./App.vue";
 import Grafiek from "./components/Grafiek.vue";
 
 const routes = [
-  { path: "/", component: Grafiek, props: (route) => route.query },
+  { path: "/ib", component: Grafiek, props: (route) => route.query },
 ];
 
 const router = createRouter({
