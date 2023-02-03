@@ -23,6 +23,10 @@ export class MarginaleDruk extends BeschikbaarInkomen {
     super(vis, personen, wonen);
   }
 
+  getYMax() {
+    return 100;
+  }
+
   bereken(arbeidsInkomen) {
     const berekening1 = this.berekenBeschikbaarInkomen(
       arbeidsInkomen,
