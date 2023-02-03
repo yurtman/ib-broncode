@@ -21,13 +21,16 @@ import gegevens from '../../../src/js/berekeningen/gegevens.js'
 const personenQuery = "V;V,10000;K612";
 const personenJson = [{leeftijd: 'V'}, {leeftijd: 'V', bruto_inkomen:10000}, {leeftijd: 'K612'}];
 
-const queryHuur = { tab: "ib", p: personenQuery, w: "huur;123", grafiek: "jaar;1,2;4"}
-const jsonHuur = { tab: "ib", personen: personenJson, wonen: {woning_type:"huur", huur:"123"}, grafiek: { periode: "jaar", van_tot: [1, 2], sv:4}};
-const jsonExpectedHuur = { tab: "ib", personen: personenJson, wonen: {woning_type:"huur", huur:123, woz:315000, rente:13482}, grafiek: { periode: "jaar", van_tot: [1, 2], sv:4}};
+const grafiekJson = { periode: "jaar", van_tot: [1, 2], svt:'p', sv_p:4, sv_abs:1000};
+const grafiekQuery = "jaar;1,2;p;4";
 
-const queryKoop = { tab: "ib", p: personenQuery, w: "koop;123456;5432", grafiek: "jaar;1,2;4"}
-const jsonKoop = { tab: "ib", personen: personenJson, wonen: {woning_type:"huur", huur:"123"}, grafiek: { periode: "jaar", van_tot: [1, 2], sv:4}};
-const jsonExpectedKoop = { tab: "ib", personen: personenJson, wonen: {woning_type:"koop", huur:600, woz:123456, rente:5432}, grafiek: { periode: "jaar", van_tot: [1, 2], sv:4}};
+const queryHuur = { tab: "ib", p: personenQuery, w: "huur;123", grafiek: grafiekQuery}
+const jsonHuur = { tab: "ib", personen: personenJson, wonen: {woning_type:"huur", huur:"123"}, grafiek: grafiekJson};
+const jsonExpectedHuur = { tab: "ib", personen: personenJson, wonen: {woning_type:"huur", huur:123, woz:315000, rente:13482}, grafiek: grafiekJson};
+
+const queryKoop = { tab: "ib", p: personenQuery, w: "koop;123456;5432", grafiek: grafiekQuery}
+const jsonKoop = { tab: "ib", personen: personenJson, wonen: {woning_type:"huur", huur:"123"}, grafiek: grafiekJson};
+const jsonExpectedKoop = { tab: "ib", personen: personenJson, wonen: {woning_type:"koop", huur:600, woz:123456, rente:5432}, grafiek: grafiekJson};
 
 test('navigatie naar json, wonen: huur', () => {
   expect(gegevens.navigatieToJson(queryHuur)).toEqual(jsonExpectedHuur)
@@ -51,7 +54,9 @@ test('lege navigatie naar json', () => {
          grafiek: {
           periode: "jaar",
           van_tot: [10000, 100000],
-          sv: 3,
+          svt: 'p',
+          sv_p: 3,
+          sv_abs: 1000,
         }
   })
 })

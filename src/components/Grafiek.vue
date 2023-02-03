@@ -147,7 +147,7 @@
             :min="0"
             :max="200000"
           />
-          <n-space :wrap="false">
+          <n-input-group>
             <n-input-number
               placeholder="Bruto Ondergrens"
               min="0"
@@ -162,7 +162,7 @@
               size="small"
               v-model:value="gegevens.grafiek.van_tot[1]"
             />
-          </n-space>
+          </n-input-group>
           <n-radio-group v-model:value="gegevens.grafiek.periode">
             <n-space :wrap="false">
               Bruto:
@@ -197,19 +197,36 @@
       </n-tab-pane>
       <n-tab-pane name="md" tab="Marginale Druk" key="md">
         <n-space vertical>
-          <n-space
+          <n-space :wrap="false"
             >Deze grafiek toont de marginale druk bij een salarisverhoging van
-            <n-input-number
-              v-model:value="gegevens.grafiek.sv"
-              min="0"
-              max="100"
-              step="1"
-              size="tiny"
-              style="width: 100px"
-            >
-              <template #suffix>%</template></n-input-number
-            ></n-space
-          >
+            <n-radio-group v-model:value="gegevens.grafiek.svt">
+              <n-radio label="%" key="p" value="p" size="small" />
+              <n-radio label="€" key="a" value="a" size="small" />
+            </n-radio-group>
+            <n-input-group>
+              <n-input-number
+                v-if="gegevens.grafiek.svt == 'p'"
+                v-model:value="gegevens.grafiek.sv_p"
+                min="0"
+                max="100"
+                step="1"
+                size="tiny"
+                style="width: 100px"
+              >
+                <template #suffix>%</template></n-input-number
+              >
+              <n-input-number
+                v-if="gegevens.grafiek.svt == 'a'"
+                v-model:value="gegevens.grafiek.sv_abs"
+                min="0"
+                step="1"
+                size="tiny"
+                style="width: 100px"
+              >
+                <template #prefix>€</template></n-input-number
+              >
+            </n-input-group>
+          </n-space>
           <div id="md"><svg></svg></div>
         </n-space>
       </n-tab-pane>
@@ -278,7 +295,9 @@ export default {
         grafiek: {
           periode: null,
           van_tot: [],
-          sv: 0,
+          svt: "p",
+          sv_abs: 1000,
+          sv_p: 3,
         },
       },
 
@@ -287,6 +306,8 @@ export default {
       personOptions: personOptions,
       personen: 1,
       // Legenda
+      sv_abs: 1000,
+      sv_p: 3,
       legendaData: { grafiek: {}, netto: {}, bruto: {} },
     };
   },

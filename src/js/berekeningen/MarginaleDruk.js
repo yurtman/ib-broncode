@@ -35,13 +35,20 @@ export class MarginaleDruk extends BeschikbaarInkomen {
       this.algemeneData
     );
     const berekening2 = this.berekenBeschikbaarInkomen(
-      arbeidsInkomen + arbeidsInkomen * (this.vis.sv / 100),
+      arbeidsInkomen + this.salarisVerhoging(arbeidsInkomen),
       this.personen,
       this.wonen,
       this.algemeneData
     );
 
     return this.marginaleDruk(berekening1, berekening2, arbeidsInkomen);
+  }
+
+  salarisVerhoging(arbeidsInkomen) {
+    console.log(this.vis.sv);
+    return this.vis.svt == "a"
+      ? this.vis.sv_abs
+      : arbeidsInkomen * (this.vis.sv_p / 100);
   }
 
   getFactor() {

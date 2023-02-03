@@ -15,7 +15,7 @@
       </p>
       <n-table :single-line="false" size="tiny" class="table">
         <tbody>
-          <tr v-for="gd in data.grafiek">
+          <tr v-for="gd in data.grafiek" :key="gd.naam">
             <td><div class="dot" :style="'background-color:' + gd.color" /></td>
             <td>{{ gd.naam }}</td>
             <td v-if="gd.percentage" class="nr">{{ gd.percentage }}</td>
@@ -26,7 +26,7 @@
 
       <n-table :single-line="false" size="tiny" class="table">
         <tbody>
-          <tr v-for="gd in data.totals">
+          <tr v-for="gd in data.totals" :key="gd.naam">
             <td>{{ gd.naam }}</td>
             <td v-if="gd.percentage" class="nr">{{ gd.percentage }}</td>
             <td class="nr">{{ gd.bedrag }}</td>

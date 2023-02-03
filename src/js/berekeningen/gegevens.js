@@ -72,14 +72,20 @@ function wonenNavigatieToJson(queryParams) {
 }
 
 function grafiekNavigatieToJson(p) {
-  if (lengte(p) != 3) {
+  if (lengte(p) != 4) {
     return {};
   }
-  return {
+  let json = {
     periode: p[0],
     van_tot: p[1],
-    sv: p[2],
+    svt: p[2],
   };
+  if (json.svt == "a") {
+    json.sv_abs = p[3];
+  } else {
+    json.sv_p = p[3];
+  }
+  return json;
 }
 
 function navigatieToJson(query) {
@@ -98,7 +104,9 @@ function navigatieToJson(query) {
     grafiek: {
       periode: "jaar",
       van_tot: [10000, 100000],
-      sv: 3,
+      svt: "p",
+      sv_p: 3,
+      sv_abs: 1000,
     },
   };
   navigatie.copyNavigatieToJson(
@@ -140,7 +148,8 @@ function wonenJsonToNavigatie(json) {
 }
 
 function grafiekJsonToNavigatie(json) {
-  return [json.periode, json.van_tot, json.sv];
+  let sv = json.svt == "a" ? json.sv_abs : json.sv_p;
+  return [json.periode, json.van_tot, json.svt, sv];
 }
 
 function jsonToNavigatie(json) {
