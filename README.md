@@ -7,7 +7,7 @@ De broncode is beschikbaar onder de AGPL3.0 licentie.
 
 # Technische informatie
 
-![Bouw broncode](https://github.com/Hilbrand/ib-broncode/actions/workflows/deploy.yml/badge.svg)
+[![Bouw broncode](https://github.com/Hilbrand/ib-broncode/actions/workflows/deploy.yml/badge.svg)](https://github.com/Hilbrand/ib-broncode/actions/workflows/deploy.yml)
 [![Uitrol naar GitHub pages](https://github.com/Hilbrand/ib/actions/workflows/pages/pages-build-deployment/badge.svg)](https://github.com/Hilbrand/ib/actions/workflows/pages/pages-build-deployment)
 
 ## Recommended IDE Setup
