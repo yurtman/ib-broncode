@@ -28,24 +28,21 @@ export class BeschikbaarInkomen extends Berekenen {
     super(vis, personen, wonen);
   }
 
-  getYMax() {
-    return Math.round(super.getYMax() / 1000);
+  getYDomain() {
+    let yDomain = super.getYDomain();
+
+    return yDomain[(0, Math.round(yDomain[1] / 1000))];
   }
 
   bereken(arbeidsInkomen) {
-    return this.berekenBeschikbaarInkomen(
-      arbeidsInkomen,
-      this.personen,
-      this.wonen,
-      this.algemeneGegevens
-    );
+    return this.berekenBeschikbaarInkomen(arbeidsInkomen);
   }
 
-  berekenBeschikbaarInkomen(arbeidsinkomen, personen, wonen, algemeneGegevens) {
-    let aow = personen[0].leeftijd == "AOW";
+  berekenBeschikbaarInkomen(arbeidsinkomen) {
+    let aow = this.personen[0].leeftijd == "AOW";
     let toetsingsInkomen = inkomen.toetsingsinkomen(
       arbeidsinkomen,
-      algemeneGegevens.hypotheekRenteAftrek
+      this.algemeneGegevens.hypotheekRenteAftrek
     );
     let toetsingsInkomenBelasting = inkomen.inkomstenBelasting(
       toetsingsInkomen,
@@ -57,7 +54,7 @@ export class BeschikbaarInkomen extends Berekenen {
     );
     let toeslagenToetsInkomen = inkomen.toeslagenToetsInkomen(
       arbeidsinkomen,
-      personen
+      this.personen
     );
     let nettoArbeidsinkomen = arbeidsinkomen - toetsingsInkomenBelasting;
     let algemeneHeffingsKorting = inkomen.algemeneHeffingsKorting(
@@ -83,11 +80,11 @@ export class BeschikbaarInkomen extends Berekenen {
     );
     let kindgebondenBudget = kgb.kindgebondenBudget(
       toeslagenToetsInkomen,
-      algemeneGegevens.maxKindgebondenBudget,
-      algemeneGegevens.toeslagenpartner
+      this.algemeneGegevens.maxKindgebondenBudget,
+      this.algemeneGegevens.toeslagenpartner
     );
 
-    let gegevens = {
+    let beschikbaarInkomen = {
       arbeidsinkomen: arbeidsinkomen,
       brutoInkomstenBelasting: toetsingsInkomenBelasting,
       netto:
@@ -97,37 +94,97 @@ export class BeschikbaarInkomen extends Berekenen {
       arbeidskorting: arbeidskorting,
       zorgtoeslag: zt.zorgtoeslag(
         toeslagenToetsInkomen,
-        algemeneGegevens.toeslagenpartner
+        this.algemeneGegevens.toeslagenpartner
       ),
-      wonen: algemeneGegevens.huren
+      wonen: this.algemeneGegevens.huren
         ? ht.huurtoeslag(
             toeslagenToetsInkomen,
-            wonen.huur,
-            personen.length,
-            algemeneGegevens.aow
+            this.wonen.huur,
+            this.personen.length,
+            this.algemeneGegevens.aow
           )
         : effectieveHypotheekRenteAftrek,
-      kinderbijslag: algemeneGegevens.kinderbijslag,
+      kinderbijslag: this.algemeneGegevens.kinderbijslag,
       kindgebondenBudget: kindgebondenBudget,
       inkomensafhankelijkeCombinatiekorting:
-        algemeneGegevens.kinderbijslag > 0
+        this.algemeneGegevens.kinderbijslag > 0
           ? iack.inkomensafhankelijkeCombinatiekorting(
               arbeidsinkomen,
-              algemeneGegevens.iacbInkomen,
-              algemeneGegevens.aow
+              this.algemeneGegevens.iacbInkomen,
+              this.algemeneGegevens.aow
             )
           : 0,
     };
 
-    gegevens.beschikbaarInkomen =
-      gegevens.netto +
-      gegevens.algemeneHeffingsKorting +
-      gegevens.arbeidskorting +
-      gegevens.zorgtoeslag +
-      gegevens.wonen +
-      gegevens.kinderbijslag +
-      gegevens.kindgebondenBudget +
-      gegevens.inkomensafhankelijkeCombinatiekorting;
-    return gegevens;
+    beschikbaarInkomen.beschikbaarInkomen =
+      beschikbaarInkomen.netto +
+      beschikbaarInkomen.algemeneHeffingsKorting +
+      beschikbaarInkomen.arbeidskorting +
+      beschikbaarInkomen.zorgtoeslag +
+      beschikbaarInkomen.wonen +
+      beschikbaarInkomen.kinderbijslag +
+      beschikbaarInkomen.kindgebondenBudget +
+      beschikbaarInkomen.inkomensafhankelijkeCombinatiekorting;
+    return beschikbaarInkomen;
+  }
+
+  verzamelGrafiekSeries(
+    alles,
+    beschikbaarInkomen,
+    arbeidsinkomen_grafiek,
+    factor
+  ) {
+    if (beschikbaarInkomen.netto !== undefined) {
+      alles.push({
+        id: arbeidsinkomen_grafiek,
+        type: "netto",
+        getal: this.afronden(beschikbaarInkomen.netto, factor),
+      });
+    }
+    alles.push(
+      {
+        id: arbeidsinkomen_grafiek,
+        type: "algemeneHeffingsKorting",
+        getal: this.afronden(
+          beschikbaarInkomen.algemeneHeffingsKorting,
+          factor
+        ),
+      },
+      {
+        id: arbeidsinkomen_grafiek,
+        type: "arbeidskorting",
+        getal: this.afronden(beschikbaarInkomen.arbeidskorting, factor),
+      },
+      {
+        id: arbeidsinkomen_grafiek,
+        type: this.algemeneGegevens.huren
+          ? "huurtoeslag"
+          : "hypotheekrenteaftrek",
+        getal: this.afronden(beschikbaarInkomen.wonen, factor),
+      },
+      {
+        id: arbeidsinkomen_grafiek,
+        type: "zorgtoeslag",
+        getal: this.afronden(beschikbaarInkomen.zorgtoeslag, factor),
+      },
+      {
+        id: arbeidsinkomen_grafiek,
+        type: "kinderbijslag",
+        getal: this.afronden(beschikbaarInkomen.kinderbijslag, factor),
+      },
+      {
+        id: arbeidsinkomen_grafiek,
+        type: "kindgebonden budget",
+        getal: this.afronden(beschikbaarInkomen.kindgebondenBudget, factor),
+      },
+      {
+        id: arbeidsinkomen_grafiek,
+        type: "inkomenafh. combi krt",
+        getal: this.afronden(
+          beschikbaarInkomen.inkomensafhankelijkeCombinatiekorting,
+          factor
+        ),
+      }
+    );
   }
 }

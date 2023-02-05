@@ -31,8 +31,8 @@ export class Berekenen {
     this.factor = functies.factorBerekening(vis.periode);
   }
 
-  getYMax() {
-    return this.vis.van_tot[1];
+  getYDomain() {
+    return [0, this.vis.van_tot[1]];
   }
 
   getAlgemeneGegevens() {
@@ -46,7 +46,7 @@ export class Berekenen {
   berekenAlgemeneGegevens(personen, wonen) {
     let toeslagenpartner = functies.toeslagenPartner(personen);
     let aow = functies.aow(personen);
-    let huren = wonen.woning_type == "huur";
+    let huren = functies.isHuur(wonen);
 
     return {
       toeslagenpartner: toeslagenpartner,
@@ -66,4 +66,16 @@ export class Berekenen {
   }
 
   bereken(arbeidsInkomen) {}
+
+  afronden(getal, factor) {
+    return (getal * factor).toFixed("2") * 1;
+  }
+
+  verzamelGrafiekSeries(
+    alles,
+    gegevens,
+    arbeidsinkomen_grafiek,
+    algemeneGegevens,
+    factor
+  ) {}
 }

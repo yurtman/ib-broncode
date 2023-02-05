@@ -183,7 +183,7 @@
       v-model:value="gegevens.tab"
     >
       <n-tab-pane name="intro" tab="Introductie">
-        <Intro />
+        <IntroPagina />
       </n-tab-pane>
       <n-tab-pane name="bi" tab="Beschikbaar Inkomen" key="bi">
         <n-space>
@@ -246,7 +246,7 @@
 
 <script>
 import { ref, nextTick } from "vue";
-import Intro from "./Intro.vue";
+import IntroPagina from "./IntroPagina.vue";
 import Legenda from "./Legenda.vue";
 import gegevens from "@/js/berekeningen/gegevens";
 import algemeen from "@/js/berekeningen/algemeen";
@@ -269,7 +269,7 @@ for (const [k, v] of Object.entries(belasting_data.LEEFTIJDEN)) {
 
 export default {
   components: {
-    Intro,
+    IntroPagina,
     Legenda,
   },
   props: ["route"],

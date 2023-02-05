@@ -23,22 +23,14 @@ export class MarginaleDruk extends BeschikbaarInkomen {
     super(vis, personen, wonen);
   }
 
-  getYMax() {
-    return 100;
+  getYDomain() {
+    return [0, 100];
   }
 
   bereken(arbeidsInkomen) {
-    const berekening1 = this.berekenBeschikbaarInkomen(
-      arbeidsInkomen,
-      this.personen,
-      this.wonen,
-      this.algemeneGegevens
-    );
+    const berekening1 = this.berekenBeschikbaarInkomen(arbeidsInkomen);
     const berekening2 = this.berekenBeschikbaarInkomen(
-      arbeidsInkomen + this.salarisVerhoging(arbeidsInkomen),
-      this.personen,
-      this.wonen,
-      this.algemeneGegevens
+      arbeidsInkomen + this.salarisVerhoging(arbeidsInkomen)
     );
 
     return this.marginaleDruk(berekening1, berekening2, arbeidsInkomen);
@@ -219,5 +211,19 @@ export class MarginaleDruk extends BeschikbaarInkomen {
       ),
       marginaleDruk: md,
     };
+  }
+
+  verzamelGrafiekSeries(alles, marginaleDruk, arbeidsinkomen_grafiek, factor) {
+    alles.push({
+      id: arbeidsinkomen_grafiek,
+      type: "netto belasting",
+      getal: this.afronden(marginaleDruk.nettoInkomensBelasting, factor),
+    });
+    super.verzamelGrafiekSeries(
+      alles,
+      marginaleDruk,
+      arbeidsinkomen_grafiek,
+      factor
+    );
   }
 }

@@ -19,12 +19,20 @@ function telPersonen(personen, controleLeeftijd) {
   return personen.filter((p) => p.leeftijd == controleLeeftijd).length;
 }
 
+function telVolwassenen(personen) {
+  return telPersonen(personen, "V") + telPersonen(personen, "AOW");
+}
+
 function toeslagenPartner(personen) {
-  return telPersonen(personen, "V") + telPersonen(personen, "AOW") > 1;
+  return telVolwassenen(personen) > 1;
 }
 
 function aow(personen) {
   return telPersonen(personen, "AOW") > 0;
+}
+
+function isHuur(wonen) {
+  return wonen.woning_type == "huur";
 }
 
 function negatiefIsNul(getal) {
@@ -37,8 +45,10 @@ function factorBerekening(periode) {
 
 export default {
   telPersonen,
+  telVolwassenen,
   toeslagenPartner,
   aow,
+  isHuur,
   negatiefIsNul,
   factorBerekening,
 };

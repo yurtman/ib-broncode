@@ -20,70 +20,26 @@ import { BeschikbaarInkomen } from "@/js/berekeningen/BeschikbaarInkomen";
 import { MarginaleDruk } from "@/js/berekeningen/MarginaleDruk";
 
 const stap = 100;
-
-function afronden(getal, factor) {
-  return (getal * factor).toFixed("2") * 1;
-}
-
-function budgetData(
+/*
+function addGrafiekGegevens2(
   alles,
   berekening,
   arbeidsinkomen_grafiek,
   algemeneGegevens,
   factor
 ) {
-  if (berekening.netto !== undefined) {
-    alles.push({
-      id: arbeidsinkomen_grafiek,
-      type: "netto",
-      getal: afronden(berekening.netto, factor),
-    });
-  }
-  if (berekening.nettoInkomensBelasting !== undefined) {
-    alles.push({
-      id: arbeidsinkomen_grafiek,
-      type: "netto belasting",
-      getal: afronden(berekening.nettoInkomensBelasting, factor),
-    });
-  }
-  alles.push(
-    {
-      id: arbeidsinkomen_grafiek,
-      type: "algemeneHeffingsKorting",
-      getal: afronden(berekening.algemeneHeffingsKorting, factor),
-    },
-    {
-      id: arbeidsinkomen_grafiek,
-      type: "arbeidskorting",
-      getal: afronden(berekening.arbeidskorting, factor),
-    },
-    {
-      id: arbeidsinkomen_grafiek,
-      type: algemeneGegevens.huren ? "huurtoeslag" : "hypotheekrenteaftrek",
-      getal: afronden(berekening.wonen, factor),
-    },
-    {
-      id: arbeidsinkomen_grafiek,
-      type: "zorgtoeslag",
-      getal: afronden(berekening.zorgtoeslag, factor),
-    },
-    {
-      id: arbeidsinkomen_grafiek,
-      type: "kinderbijslag",
-      getal: afronden(berekening.kinderbijslag, factor),
-    },
-    {
-      id: arbeidsinkomen_grafiek,
-      type: "kindgebonden budget",
-      getal: afronden(berekening.kindgebondenBudget, factor),
-    },
-    {
-      id: arbeidsinkomen_grafiek,
-      type: "inkomenafh. combi krt",
-      getal: afronden(berekening.inkomensafhankelijkeCombinatiekorting, factor),
-    }
-  );
+  alles.push({
+    id: arbeidsinkomen_grafiek,
+    type: "belasting percentage",
+    getal:
+      1000 *
+      ((arbeidsinkomen_grafiek - berekening.beschikbaarInkomen) /
+        arbeidsinkomen_grafiek) *
+      100,
+    //      getal: afronden((berekening.beschikbaarInkomen / arbeidsinkomen_grafiek) * 100, factor),
+  });
 }
+*/
 
 function log(berekening, berekening2) {
   console.log("".padEnd(30, "."));
@@ -106,11 +62,10 @@ function berekenGrafiekData(type, vis, personen, wonen) {
   for (let i = vis.van_tot[0]; i <= vis.van_tot[1]; i += stap) {
     let arbeidsinkomen_grafiek = Math.round(i * factor);
 
-    budgetData(
+    bereken.verzamelGrafiekSeries(
       alles,
       bereken.bereken(i),
       arbeidsinkomen_grafiek,
-      bereken.getAlgemeneGegevens(),
       bereken.getFactor()
     );
   }
