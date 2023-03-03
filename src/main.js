@@ -16,18 +16,18 @@
  */
 
 import { createApp } from "vue";
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import naive from "naive-ui";
 import App from "./App.vue";
 import HoofdPanel from "./components/HoofdPanel.vue";
 
 const routes = [
-  { path: "/ib", component: HoofdPanel, props: (route) => route.query },
-  { path: "/ib/bluemink", component: HoofdPanel, props: (route) => route },
+  { path: "", component: HoofdPanel, props: (route) => route.query },
+  { path: "/bluemink", component: HoofdPanel, props: (route) => route },
 ];
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 

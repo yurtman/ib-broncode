@@ -26,7 +26,7 @@ const stap = 100;
 function berekenGrafiekData(path, type, vis, personen, wonen) {
   let berekenen = null;
   let bi =
-    path == "/ib/bluemink"
+    path == "/bluemink"
       ? new BlueminkBeschikbaarInkomen(vis, personen, wonen)
       : new BeschikbaarInkomen(vis, personen, wonen);
 

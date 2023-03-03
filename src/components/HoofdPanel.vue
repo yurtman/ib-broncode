@@ -13,7 +13,7 @@
       v-model:value="gegevens.tab"
     >
       <n-tab-pane name="intro" tab="Introductie">
-        <IntroBluemink v-if="$route.path == '/ib/bluemink'" />
+        <IntroBluemink v-if="$route.path == '/bluemink'" />
         <IntroPagina v-else />
       </n-tab-pane>
       <n-tab-pane name="bi" tab="Beschikbaar Inkomen" key="bi">
