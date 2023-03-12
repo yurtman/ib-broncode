@@ -200,7 +200,7 @@ function StackedAreaChart(
   }
 
   function hoverMouseOff() {
-    // hoverLineGroup.style("opacity", 1e-6);
+    legenda.setGetal();
   }
 
   return Object.assign(svg.node(), { scales: { color } });

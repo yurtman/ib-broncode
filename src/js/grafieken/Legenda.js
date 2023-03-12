@@ -52,12 +52,15 @@ export class Legenda {
   setLegendaText(data, length, offset) {}
 
   setGetal() {
-    let b = this.berekenen.bereken(this.berekenen.vis.arbeidsInkomen);
-    let id = this.berekenen.vis.arbeidsInkomen * this.berekenen.getFactor();
-    var data = [];
-    this.berekenen.verzamelGrafiekSeries(data, b, id);
-    this.setLegendaText(data, data.length, 0);
-    this.updateFunction(id);
+    let ab = this.berekenen.vis.arbeidsInkomen;
+    if (ab > 0) {
+      let b = this.berekenen.bereken(ab);
+      let id = ab * this.berekenen.getFactor();
+      var data = [];
+      this.berekenen.verzamelGrafiekSeries(data, b, id);
+      this.setLegendaText(data, data.length, 0);
+      this.updateFunction(id);
+    }
   }
 
   berekenGetallen(entry) {
