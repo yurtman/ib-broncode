@@ -29,7 +29,7 @@ export class MarginaleDrukLegenda extends Legenda {
     let b = this.berekenGetallen(data[offset]);
     let ld = {
       grafiek: [],
-      titel: "Salarisverhoging",
+      titel: "Opbouw van de marginale druk met vermindering in toeslagen en kortingen",
       arbeidsInkomen: data[offset].id.toFixed(),
     };
     let factor = this.berekenen.getFactor();
@@ -53,12 +53,12 @@ export class MarginaleDrukLegenda extends Legenda {
         bedrag: this.geld(md),
       },
       {
-        naam: "netto",
+        naam: "netto salarisverhoging",
         percentage: this.percentage(100 - totaal),
         bedrag: this.geld((b.arbeidsinkomen * factor).toFixed() - md),
       },
       {
-        naam: "bruto",
+        naam: "bruto salarisverhoging",
         percentage: this.percentage(100),
         bedrag: this.geld(b.arbeidsinkomen * factor),
       },
