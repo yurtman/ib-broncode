@@ -220,7 +220,7 @@ export class MarginaleDruk extends Berekenen {
     alles.push({
       id: id,
       type: "netto belasting",
-      getal: this.afronden(
+      getal: functies.afronden(
         marginaleDruk.nettoInkomensBelasting,
         this.bi.factor
       ),

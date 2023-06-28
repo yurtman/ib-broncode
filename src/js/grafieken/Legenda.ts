@@ -15,46 +15,63 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
 
+export interface ColorFunction {
+  (i: number): any;
+}
+
+export interface LegendaFunction {
+  (data: any): void;
+}
+
+export interface UpdateFunction {
+  (id: number): void;
+}
+
 /**
  * Basis class voor legenda in grafiek.
  */
-export class Legenda {
+export abstract class Legenda {
   static EURO = "€";
 
-  constructor(berekenen) {
+  berekenen: any;
+  colorFunction: ColorFunction;
+  legendaFunction: LegendaFunction;
+  updateFunction: UpdateFunction;
+
+  constructor(berekenen: any) {
     this.berekenen = berekenen;
   }
 
-  setColorFunction(colorFunction) {
+  setColorFunction(colorFunction: ColorFunction) {
     this.colorFunction = colorFunction;
   }
 
-  setLegendaFunction(legendaFunction) {
+  setLegendaFunction(legendaFunction: LegendaFunction) {
     this.legendaFunction = legendaFunction;
   }
 
-  setUpdateFunction(updateFunction) {
+  setUpdateFunction(updateFunction: UpdateFunction) {
     this.updateFunction = updateFunction;
   }
 
-  percentage(getal) {
+  percentage(getal: number) : string {
     return (
       (getal > 0 ? (1 * getal).toFixed(2) : "-").padStart(5, "\u00A0") + " %"
     );
   }
 
-  geld(bedrag) {
+  geld(bedrag: number) : string {
     return bedrag > 0
       ? Legenda.EURO + " " + bedrag.toFixed().padStart(4, "\u00A0")
       : "-";
   }
 
-  setLegendaVast(data, length, offset) {
+  setLegendaVast(data: any, length: number, offset: number) {
     this.berekenen.vis.arbeidsInkomen = data[offset].id;
-    setLegendaText(ata, length, offset);
+    this.setLegendaText(data, length, offset);
   }
 
-  setLegendaText(data, length, offset) {}
+  abstract setLegendaText(data: any, length: number, offset: number): void;
 
   setGetal() {
     let ab = this.berekenen.vis.arbeidsInkomen;
@@ -68,14 +85,15 @@ export class Legenda {
     }
   }
 
-  berekenGetallen(entry) {
+  berekenGetallen(entry: any) : any {
     return this.berekenen.bereken(entry.id / this.berekenen.getFactor());
   }
-  getLabelYAs() {
+
+  getLabelYAs() : string {
     return "";
   }
 
-  getFactorYas() {
+  getFactorYas() : number {
     return 1;
   }
 }

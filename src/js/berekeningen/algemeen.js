@@ -23,7 +23,8 @@ import { BlueminkBeschikbaarInkomen } from "@/bluemink/BlueminkBeschikbaarInkome
 
 const stap = 100;
 
-function berekenGrafiekData(path, type, vis, personen, wonen) {
+
+function berekenData(path, type, vis, personen, wonen, stap) {
   let berekenen = null;
   let bi =
     path == "/bluemink"
@@ -41,7 +42,18 @@ function berekenGrafiekData(path, type, vis, personen, wonen) {
       berekenen = new EffectieveBelasting(vis, personen, wonen, bi);
       break;
   }
+  for (let i = vis.van_tot[0]; i <= vis.van_tot[1]; i += stap) {
+    let id = Math.round(i * berekenen.factor);
+
+    berekenen.verzamelGrafiekSeries(series, berekenen.bereken(i), id);
+  }
+}
+// new BeschikbaarInkomenGrafiek(this.vis.van_tot[1]);
+
+function berekenGrafiekData(path, type, vis, personen, wonen) {
   let series = [];
+
+  berekenData(path, type, vis, personen, wonen, stap);
 
   for (let i = vis.van_tot[0]; i <= vis.van_tot[1]; i += stap) {
     let id = Math.round(i * berekenen.factor);

@@ -15,7 +15,7 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
 
-import { assert, expect, test } from 'vitest'
+import { expect, test } from 'vitest'
 import ht from '../../../src/js/belasting/huurtoeslag.js'
 
 test('Huurtoeslag alleen 14.500, rekenhuur 355', () => {

@@ -15,23 +15,24 @@
  * along with this program.  If not, see http://www.gnu.org/licenses/.
  */
 
-import { Legenda } from "@/js/grafieken/Legenda";
+import { Legenda } from "./Legenda";
 
 /**
  * Legenda voor tonen beschikbaar inkomen.
  */
 export class BeschikbaarInkomenLegenda extends Legenda {
-  constructor(berekenen) {
+  constructor(berekenen: any) {
     super(berekenen);
   }
 
-  setLegendaText(data, length, offset) {
+  setLegendaText(data: any, length: number, offset: number) {
     let totaal = 0;
-    let b = this.berekenGetallen(data[offset]);
+    let b = super.berekenGetallen(data[offset]);
     let ld = {
-      grafiek: [],
+      grafiek: [] as any,
       titel: "Beschikbaar inkomen",
       arbeidsInkomen: data[offset].id.toFixed(),
+      totals: {} as any,
     };
 
     for (let j = 0; j < length; j++) {
@@ -39,19 +40,19 @@ export class BeschikbaarInkomenLegenda extends Legenda {
       let getal = entry.getal;
       totaal += getal;
       ld.grafiek.unshift({
-        color: this.colorFunction(j),
+        color: super.colorFunction(j),
         naam: entry.type,
-        bedrag: this.geld(entry.getal),
+        bedrag: super.geld(entry.getal),
       });
     }
     ld.totals = [
-      { naam: "beschikbaar inkomen", bedrag: this.geld(totaal) },
+      { naam: "beschikbaar inkomen", bedrag: super.geld(totaal) },
       {
         naam: "bruto",
-        bedrag: this.geld(b.arbeidsinkomen * this.berekenen.getFactor()),
+        bedrag: super.geld(b.arbeidsinkomen * super.berekenen.getFactor()),
       },
     ];
-    this.legendaFunction(ld);
+    super.legendaFunction(ld);
   }
 
   getLabelYAs() {

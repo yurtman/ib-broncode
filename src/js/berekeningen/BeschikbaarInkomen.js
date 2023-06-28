@@ -29,16 +29,6 @@ export class BeschikbaarInkomen extends Berekenen {
     super(vis, personen, wonen);
   }
 
-  createLegenda() {
-    return new BeschikbaarInkomenLegenda(this);
-  }
-
-  getYDomain() {
-    let yDomain = super.getYDomain();
-
-    return yDomain[(0, Math.round(yDomain[1] / 1000))];
-  }
-
   bereken(arbeidsInkomen) {
     return this.berekenBeschikbaarInkomen(arbeidsInkomen);
   }
@@ -139,14 +129,14 @@ export class BeschikbaarInkomen extends Berekenen {
       alles.push({
         id: id,
         type: "netto",
-        getal: this.afronden(beschikbaarInkomen.netto, factor),
+        getal: functies.afronden(beschikbaarInkomen.netto, factor),
       });
     }
     alles.push(
       {
         id: id,
         type: "algemeneHeffingsKorting",
-        getal: this.afronden(
+        getal: functies.afronden(
           beschikbaarInkomen.algemeneHeffingsKorting,
           factor
         ),
@@ -154,38 +144,39 @@ export class BeschikbaarInkomen extends Berekenen {
       {
         id: id,
         type: "arbeidskorting",
-        getal: this.afronden(beschikbaarInkomen.arbeidskorting, factor),
+        getal: functies.afronden(beschikbaarInkomen.arbeidskorting, factor),
       },
       {
         id: id,
         type: this.algemeneGegevens.huren
           ? "huurtoeslag"
           : "hypotheekrenteaftrek",
-        getal: this.afronden(beschikbaarInkomen.wonen, factor),
+        getal: functies.afronden(beschikbaarInkomen.wonen, factor),
       },
       {
         id: id,
         type: "zorgtoeslag",
-        getal: this.afronden(beschikbaarInkomen.zorgtoeslag, factor),
+        getal: functies.afronden(beschikbaarInkomen.zorgtoeslag, factor),
       },
       {
         id: id,
         type: "kinderbijslag",
-        getal: this.afronden(beschikbaarInkomen.kinderbijslag, factor),
+        getal: functies.afronden(beschikbaarInkomen.kinderbijslag, factor),
       },
       {
         id: id,
         type: "kindgebonden budget",
-        getal: this.afronden(beschikbaarInkomen.kindgebondenBudget, factor),
+        getal: functies.afronden(beschikbaarInkomen.kindgebondenBudget, factor),
       },
       {
         id: id,
         type: "inkomenafh. combi krt",
-        getal: this.afronden(
+        getal: functies.afronden(
           beschikbaarInkomen.inkomensafhankelijkeCombinatiekorting,
           factor
         ),
       }
     );
   }
+
 }

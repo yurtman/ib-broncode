@@ -58,7 +58,7 @@ export class EffectieveBelasting extends BeschikbaarInkomen {
     alles.push({
       id: id,
       type: "effectieve belasting",
-      getal: this.afronden(
+      getal: functies.afronden(
         beschikbaarInkomen.effectieveBelastingPercentage,
         this.getFactor()
       ),

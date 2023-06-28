@@ -31,19 +31,6 @@ export class Berekenen {
     this.factor = functies.factorBerekening(vis.periode);
   }
 
-  getLegenda() {
-    if (this.legenda === undefined) {
-      this.legenda = this.createLegenda();
-    }
-    return this.legenda;
-  }
-
-  createLegenda() {}
-
-  getYDomain() {
-    return [0, this.vis.van_tot[1]];
-  }
-
   getAlgemeneGegevens() {
     return this.algemeneGegevens;
   }
@@ -79,10 +66,6 @@ export class Berekenen {
    * @param arbeidsInkomen jaar arbeidsinkomen
    */
   bereken(arbeidsInkomen) {}
-
-  afronden(getal, factor) {
-    return (getal * factor).toFixed("2") * 1;
-  }
 
   verzamelGrafiekSeries(alles, gegevens, id) {}
 }

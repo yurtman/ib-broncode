@@ -43,6 +43,14 @@ function factorBerekening(periode) {
   return "maand" == periode ? (1 / 12) : 1;
 }
 
+function kolom(title, key) {
+  return { "title": title, "key": key};
+}
+
+function afronden(getal, factor) {
+  return (getal * factor).toFixed("2") * 1;
+}
+
 export default {
   telPersonen,
   telVolwassenen,
@@ -51,4 +59,6 @@ export default {
   isHuur,
   negatiefIsNul,
   factorBerekening,
+  kolom,
+  afronden,
 };
