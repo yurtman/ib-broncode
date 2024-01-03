@@ -172,7 +172,7 @@ function StackedAreaChart(
       .attr("stroke", "#333")
       .attr("x1", xScale(xDomain[0]))
       .attr("x2", xScale(xDomain[1]))
-      .attr("y1", yScale(xDomain[0]/1000))
+      .attr("y1", yScale(xDomain[0] / 1000))
       .attr("y2", yScale(yDomain[1]));
   }
 
@@ -189,10 +189,7 @@ function StackedAreaChart(
     hoverLine.attr("x1", x).attr("x2", x);
   });
   // rectHover
-  svg
-    .on("mouseout", hoverMouseOff)
-    .on("mousemove", hoverMouseOn)
-    .on("mouseup", mouseUp);
+  svg.on("mouseout", hoverMouseOff).on("mousemove", hoverMouseOn).on("mouseup", mouseUp);
 
   function hoverMouseOn(event) {
     onMouse(event, false);

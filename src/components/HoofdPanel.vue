@@ -5,22 +5,13 @@
       <WonenComponent :jaar="gegevens.grafiek.jaar" :wonen="gegevens.wonen" />
       <GrafiekInstellingComponent :grafiekInstellingen="gegevens.grafiek" />
     </div>
-    <n-tabs
-      ref="tabsRef"
-      type="line"
-      style="padding: 0 10px"
-      @update:value="tabUpdated"
-      v-model:value="gegevens.tab"
-    >
+    <n-tabs ref="tabsRef" type="line" style="padding: 0 10px" @update:value="tabUpdated" v-model:value="gegevens.tab">
       <n-tab-pane name="intro" tab="Introductie">
         <IntroBluemink v-if="$route.path == '/bluemink'" />
         <IntroPagina v-else />
       </n-tab-pane>
       <n-tab-pane name="bi" tab="Beschikbaar Inkomen" key="bi">
-        <n-space>
-          Deze grafiek toont het beschikbare inkomen uitgesplitst naar kortingen
-          en toeslagen.
-        </n-space>
+        <n-space> Deze grafiek toont het beschikbare inkomen uitgesplitst naar kortingen en toeslagen. </n-space>
         <div id="bi"></div>
       </n-tab-pane>
       <n-tab-pane name="md" tab="Marginale Druk" key="md">
@@ -58,7 +49,7 @@
           <div id="md"></div>
         </n-space>
       </n-tab-pane>
-<!--
+      <!--
       <n-tab-pane name="eb" tab="Effectieve Belasting" key="eb">
         <n-space vertical>
           <div id="eb"></div>
@@ -172,8 +163,7 @@ export default {
   methods: {
     resize() {
       if (document.getElementById("infoBar")) {
-        document.getElementById("infoBar").style.maxHeight =
-          document.documentElement.clientHeight + "px";
+        document.getElementById("infoBar").style.maxHeight = document.documentElement.clientHeight + "px";
       }
       this.chart();
     },
