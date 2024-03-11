@@ -10,21 +10,17 @@
       </div>
       <n-table :single-line="false" size="tiny" class="table">
         <tbody>
-          <tr v-for="gd in data.grafiek" :key="gd.naam">
+          <tr v-for="(gd, idx) in data.grafiek" :key="gd.naam">
             <td><div class="dot" :style="'background-color:' + gd.color" /></td>
             <td>{{ gd.naam }}</td>
             <td v-if="gd.percentage" class="nr">{{ gd.percentage }}</td>
-            <td class="nr">{{ gd.bedrag }}</td>
+            <td class="nr nr2">{{ gd.bedrag }}
+            </td>
           </tr>
-        </tbody>
-      </n-table>
-
-      <n-table :single-line="false" size="tiny" class="table">
-        <tbody>
-          <tr v-for="gd in data.totals" :key="gd.naam">
-            <td>{{ gd.naam }}</td>
-            <td v-if="gd.percentage" class="nr">{{ gd.percentage }}</td>
-            <td class="nr">{{ gd.bedrag }}</td>
+          <tr v-for="(gd, idx) in data.totals" :key="gd.naam" >
+            <td colspan="2" class="tekst" :class='streep(idx)'>{{ gd.naam }}</td>
+            <td v-if="gd.percentage" class="nr" :class='streep(idx)'>{{ gd.percentage }}</td>
+            <td class="nr" :class='streep(idx)'>{{ gd.bedrag }}</td>
           </tr>
         </tbody>
       </n-table>
@@ -39,6 +35,7 @@
 }
 .nr {
   width: 70px;
+  text-align: right;
 }
 .dot {
   border-radius: 15px;
@@ -46,10 +43,23 @@
   height: 15px;
   margin: 5px;
 }
+.tekst {
+  padding-left: 7px;
+}
+.streep {
+  border-top: 1px solid black;
+}
 </style>
 
 <script>
 export default {
   props: ["data"],
+  methods: {
+    streep(idx) {
+      console.log(idx);
+      return idx === 0 ? "streep" : undefined;
+    },
+  }
 };
+
 </script>

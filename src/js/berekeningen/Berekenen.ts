@@ -17,18 +17,14 @@
 import functies from "../functies.js";
 import hra from "../belasting/hypotheekrente_aftrek.js";
 import iack from "../belasting/inkomensafhankelijke_combinatiekorting";
-import inkomen from "../belasting/inkomen";
 import kbs from "../belasting/kinderbijslag";
 import kgb from "../belasting/kindgebonden_budget";
 import {
   BerekenInvoerType,
   BerekenResultaatType,
   GrafiekType,
-  LeeftijdType,
-  PeriodeType,
   PersoonType,
   WonenType,
-  WoningType,
 } from "../../types";
 import { Legenda } from "../grafieken/Legenda";
 

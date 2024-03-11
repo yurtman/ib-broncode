@@ -78,7 +78,7 @@ export class BeschikbaarInkomen extends Berekenen {
     // Berekende belasting als hypotheek rente van inkomen is afgetrokken.
     // Dit is maximum te betalen belasting.
     let hypotheekInkomenBelasting = inkomen.inkomstenBelasting(this.vis.jaar, hypotheekInkomen, aow);
-    // Potentiel aftrekbare hypotheekrente is verschil tussen arbeidsinkomen belasting
+    // Potentieel aftrekbare hypotheekrente is verschil tussen arbeidsinkomen belasting
     // en belasting van inkomen met hypotheekrente verekend in het inkomen.
     let hypotheekRenteAftrek = arbeidsinkomenBelasting - hypotheekInkomenBelasting;
     // Maximum te betalen belasting is arbeidsinkomen belasting minus AHK en AK.
@@ -150,7 +150,7 @@ export class BeschikbaarInkomen extends Berekenen {
     alles.push(
       {
         id: id,
-        type: "algemeneHeffingsKorting",
+        type: "alg. heffingskorting",
         getal: this.afronden(beschikbaarInkomen.algemeneHeffingsKorting, factor),
       },
       {

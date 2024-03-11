@@ -47,7 +47,7 @@ export class BeschikbaarInkomenLegenda extends Legenda {
     ld.totals = [
       { naam: "beschikbaar inkomen", bedrag: this.geld(totaal) },
       {
-        naam: "bruto",
+        naam: "arbeidsinkomen",
         bedrag: this.geld(b.arbeidsinkomen * this.berekenen.getFactor()),
       },
     ];
