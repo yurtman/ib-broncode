@@ -78,9 +78,9 @@ test("navigatie naar json, wonen: koop", () => {
 });
 
 test("half lege navigatie", () => {
-  expect(gegevens.navigatieToJson({ tab: TabType.EB })).toEqual({
-    tab: TabType.EB,
+  expect(gegevens.navigatieToJson({ tab: TabType.BD })).toEqual({
     personen: [{ leeftijd: "V" }],
+    tab: TabType.BD,
     wonen: {
       woning_type: "huur",
       huur: 600,

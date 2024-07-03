@@ -233,7 +233,7 @@ const HTBP = {
       "Factor b": 0.002393492603,
       MinInkGr: 20700,
       DoelGrpGr: 0,
-      TaakStBedr: -34.67,
+      TaakStBedr: -37.72,
       MinNrmHr: 226.67,
     },
     EPHAOW: {
@@ -241,7 +241,7 @@ const HTBP = {
       "Factor b": -0.002120192534,
       MinInkGr: 22025,
       DoelGrpGr: 0,
-      TaakStBedr: -34.67,
+      TaakStBedr: -37.72,
       MinNrmHr: 224.85,
     },
     MPH: {
@@ -249,7 +249,7 @@ const HTBP = {
       "Factor b": 0.001807837711,
       MinInkGr: 26975,
       DoelGrpGr: 0,
-      TaakStBedr: -34.67,
+      TaakStBedr: -37.72,
       MinNrmHr: 226.67,
     },
     MPHAOW: {
@@ -257,7 +257,7 @@ const HTBP = {
       "Factor b": -0.003053924481,
       MinInkGr: 29325,
       DoelGrpGr: 0,
-      TaakStBedr: -34.67,
+      TaakStBedr: -37.72,
       MinNrmHr: 223.04,
     },
   },
@@ -1724,11 +1724,11 @@ const KOTT = {
 // Kinderbijslag per kwartaal
 
 const KBS = {
-  // Kinderbijslag 2024 is van 3e kwartaal 2023
+  // Kinderbijslag 2024 is vanaf 1 juli 2024
   2024: {
-    K05: 261.7,
-    K611: 317.77,
-    K1217: 373.85,
+    K05: 281.69,
+    K611: 342.05,
+    K1217: 402.41,
   },
   2023: {
     K05: 261.7,
