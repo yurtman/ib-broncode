@@ -28,16 +28,18 @@
         />
       </n-input-group>
     </n-space>
+    <!--
     <n-space vertical>
       <n-radio-group v-model:value="visualisatie.periode">
         <n-space :wrap="false">
           Bruto:
           <n-radio label="Jaarbasis" key="jaar" value="jaar" size="small" />
-          <n-radio label="per Maand" key="maand" value="maand" size="small" />
+          <n-radio label="Per maand" key="maand" value="maand" size="small" />
         </n-space>
       </n-radio-group>
     </n-space>
-    <br />
+    -->
+    <n-divider />
     <n-space vertical>
       <n-radio-group v-model:value="visualisatie.type">
         <n-space :wrap="false">

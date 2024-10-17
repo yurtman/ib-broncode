@@ -63,10 +63,9 @@ function berekenTabelData(gegevens: InvoerGegevensType) {
   let series = [];
 
   for (let i = vis.van_tot[0]; i <= vis.van_tot[1]; i += vis.stap) {
-    let id = Math.round(i * berekenen.factor);
-    let idx = (i - vis.van_tot[0]) / vis.stap;
+    let idx = Math.round((i - vis.van_tot[0]) / vis.stap);
 
-    series[idx] = berekenen.bereken(i, VisualisatieTypeType.T);
+    series[idx] = berekenen.bereken(Math.round(i), VisualisatieTypeType.T);
   }
   return { berekenen: berekenen, series: series };
 }
